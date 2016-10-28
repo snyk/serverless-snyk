@@ -8,7 +8,8 @@
     "url": "git+https://github.com/Snyk/serverless-snyk.git"
   },
   "scripts": {
-    "lint": "jscs index.js"
+    "lint": "jscs index.js",
+    "test": "snyk test"
   },
   "keywords": [
     "security",
