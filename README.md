@@ -1,3 +1,5 @@
+[![Snyk logo](https://snyk.io/style/asset/logo/snyk-print.svg)](https://snyk.io)
+
 # Serverless Snyk Plugin
 
 ## What is it?
