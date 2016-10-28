@@ -28,7 +28,7 @@ For Serverless v1 only.
 
    Next, you'll need to add the plugin to your `serverless.yml` file:
 
-   ```
+   ```yml
    plugins:
       - serverless-snyk
    ```
@@ -43,7 +43,7 @@ By default, Serverless Snyk will stop serverless from deplying if Snyk detects a
 
 If you would like serverless to deploy your application even if Snyk finds known vulnerabilities, you can accomplish this by using a custom variable in your `serverless.yml` file.
 
-```
+```yml
 custom:
   snyk:
     breakOnVuln: false
