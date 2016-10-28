@@ -7,13 +7,21 @@ For Serverless v1 only.
 
 ## How do I use it?
 
-1. Install using npm
+1. Install Snyk using npm
+
+    `npm install -g snyk` 
+
+2. Run `snyk wizard` in your project
+
+    To get started, you'll need to run `snyk wizard`, which will create a Snyk policy file as well as prompt you to fix any discovered vulnerabilities.
+
+3. Install the Serverless Snyk plugin using npm
 
    `npm install serverless-snyk --save-dev`
 
    You should now have Serverless Snyk installed and ready to go. You can confirm that the plugin has been installed by running `serverless` from your command line. You should see the Snyk plugin in the list of installed plugins. 
 
-2. Add the plugin to your Serverless config
+4. Add the plugin to your Serverless config
 
    Next, you'll need to add the plugin to your `serverless.yml` file:
 
@@ -23,6 +31,9 @@ For Serverless v1 only.
    ```
 
 That's it! Now when you deploy, the Serverless Snyk plugin will scan your application for known vulnerabilities.
+
+
+## Configuring
 
 ### Deploying even if vulnerabilities are discovered
 By default, Serverless Snyk will stop serverless from deplying if Snyk detects any vulnerabilities in your dependencies. Each vulnerability will also be outputted, and you'll be prompted to run `snyk wizard` to address the issues. 
