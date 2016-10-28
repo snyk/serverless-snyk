@@ -1,0 +1,32 @@
+{
+  "name": "serverless-snyk",
+  "version": "0.1.0",
+  "description": "Serverless plugin for securing your dependencies with Snyk",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Snyk/serverless-snyk.git"
+  },
+  "scripts": {
+    "lint": "jscs index.js"
+  },
+  "keywords": [
+    "security",
+    "snyk"
+  ],
+  "author": "Tim Kadlec",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Snyk/serverless-snyk/issues"
+  },
+  "homepage": "https://github.com/Snyk/serverless-snyk#readme",
+  "devDependencies": {
+    "jscs": "^3.0.7"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "chalk": "^1.1.3",
+    "dotenv": "^2.0.0",
+    "snyk": "^1.19.1"
+  }
+}
