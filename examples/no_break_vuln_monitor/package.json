@@ -1,0 +1,17 @@
+{
+  "name": "serverless-snyk-example",
+  "version": "1.0.0",
+  "description": "Serverless snyk example",
+  "main": "handler.js",
+  "author": "Tim Kadlec",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.15.2",
+    "st": "^1.1.0",
+    "tap": "^5.7.0"
+  },
+  "devDependencies": {
+    "snyk": "^1.19.1",
+    "serverless-snyk": "^0.0.1"
+  }
+}
