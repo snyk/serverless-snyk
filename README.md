@@ -1,9 +1,12 @@
 [![Snyk logo](https://snyk.io/style/asset/logo/snyk-print.svg)](https://snyk.io)
+
+[![Build Status](https://travis-ci.org/Snyk/serverless-snyk.svg?branch=master)](https://travis-ci.org/Snyk/serverless-snyk)
+[![Known Vulnerabilities](https://snyk.io/test/github/snyk/serverless-snyk/badge.svg)](https://snyk.io/test/github/snyk/serverless-snyk)
+
 ***
 
 # Serverless Snyk Plugin
 
-## What is it?
 The Serverless Snyk plugin allows you to check the Node.js dependencies in your [Serverless](https://github.com/serverless/serverless) app for known vulnerabilities using [Snyk](https://snyk.io).
 
 For Serverless v1 only.
