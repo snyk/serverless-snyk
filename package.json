@@ -1,15 +1,15 @@
 {
   "name": "serverless-snyk",
-  "version": "0.1.0",
   "description": "Serverless plugin for securing your dependencies with Snyk",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Snyk/serverless-snyk.git"
+    "url": "https://github.com/Snyk/serverless-snyk.git"
   },
   "scripts": {
     "lint": "jscs index.js",
-    "test": "snyk test"
+    "test": "snyk test",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "keywords": [
     "security",
@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/Snyk/serverless-snyk#readme",
   "devDependencies": {
-    "jscs": "^3.0.7"
+    "jscs": "^3.0.7",
+    "semantic-release": "^4.3.5"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
