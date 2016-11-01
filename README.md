@@ -7,7 +7,7 @@
 
 # Serverless Snyk Plugin
 
-The Serverless Snyk plugin allows you to check the Node.js dependencies in your [Serverless](https://github.com/serverless/serverless) app for known vulnerabilities using [Snyk](https://snyk.io).
+Around 14% of npm packages carry a known vulnerability, and new vulnerabilities are being [discovered every day](https://snyk.io/vuln). The Serverless Snyk plugin helps you keep your application secure by allowing you to check the Node.js dependencies in your [Serverless](https://github.com/serverless/serverless) app for known vulnerabilities using [Snyk](https://snyk.io).
 
 For Serverless v1 only.
 
@@ -23,7 +23,7 @@ For Serverless v1 only.
 
 3. Install the Serverless Snyk plugin using npm
 
-   `npm install serverless-snyk --save-dev`
+   `npm install serverless-snyk --save`
 
    You should now have Serverless Snyk installed and ready to go. You can confirm that the plugin has been installed by running `serverless` from your command line. You should see the Snyk plugin in the list of installed plugins. 
 
@@ -35,6 +35,10 @@ For Serverless v1 only.
    plugins:
       - serverless-snyk
    ```
+
+5. Optional: Get a Snyk API Key
+
+   To avoid running into API rate limits and to enable [continuous monitoring](#continuous-monitoring), you'll need to [sign up for a Snyk account](https://snyk.io/auth/github) (if you don't have one already) and copy the API token from your dashboard. Detailed instructions on how to include the API token in your configuration are included in the [continuous monitoring](#continuous-monitoring) section below.
 
 That's it! Now when you deploy, the Serverless Snyk plugin will scan your application for known vulnerabilities.
 
@@ -54,7 +58,7 @@ custom:
 
 Snyk will still run and report any vulnerabilities, but the deploy will now continue on successfully.
 
-### Continual monitoring
+### Continuous monitoring
 Out of the box Serverless Snyk will help to make sure that there are no known vulnerabilities at the time of deploy. Snyk can also monitor your project and alert you if new vulnerabilities are discovered.
 
 To enable this feature, you'll need to authenticate by [signing up for an account](https://snyk.io/auth/github) (if you don't have one already) and copying the API token from your dashboard. 

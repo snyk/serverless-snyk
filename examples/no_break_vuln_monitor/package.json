@@ -8,9 +8,7 @@
   "dependencies": {
     "moment": "^2.15.2",
     "st": "^1.1.0",
-    "tap": "^5.7.0"
-  },
-  "devDependencies": {
+    "tap": "^5.7.0",
     "snyk": "^1.19.1",
     "serverless-snyk": "^0.0.1"
   }
