@@ -15,7 +15,7 @@ class ServerlessSnyk {
     /* Defaults to be overriden in serverless.yml file */
     this.breakOnVuln = true;
     this.snykAuth = false;
-
+    this.monitor = true;
     /* Pull in any custom snyk related variables */
     var customs = this.serverless.service.custom;
     if (customs && customs.snyk) {
@@ -56,20 +56,21 @@ class ServerlessSnyk {
           throw error;
         }
       }
-
-      try {
-        var monitor = execSync('snyk monitor');
-        var output = monitor.toString().split('\n\n');
-        for (var i = 0; i < output.length; i++) {
-          if (output[i] != '\n') {
-            this.serverless.cli.log(output[i].replace('\n', ' '));
+      if (this.monitor) {
+        try {
+          var monitor = execSync('snyk monitor');
+          var output = monitor.toString().split('\n\n');
+          for (var i = 0; i < output.length; i++) {
+            if (output[i] != '\n') {
+              this.serverless.cli.log(output[i].replace('\n', ' '));
+            }
           }
-        }
-      } catch (error) {
-        if (error.stderr) {
-          throw new this.serverless.classes.Error(error.stdout.toString());
-        } else {
-          throw error;
+        } catch (error) {
+          if (error.stderr) {
+            throw new this.serverless.classes.Error(error.stdout.toString());
+          } else {
+            throw error;
+          }
         }
       }
     }
