@@ -10,6 +10,6 @@
     "tap": "^5.7.0",
     "marked": "0.3.5",
     "snyk": "^1.19.1",
-    "serverless-snyk": "^1.0.0",
+    "serverless-snyk": "^1.0.0"
   }
 }
