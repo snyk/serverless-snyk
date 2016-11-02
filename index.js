@@ -11,6 +11,7 @@ class ServerlessSnyk {
     this.serverless = serverless;
     this.options = options;
     this.snyk = snyk;
+    this.snykCLI = 'node ./node_modules/snyk/cli';
 
     /* Defaults to be overriden in serverless.yml file */
     this.breakOnVuln = true;
@@ -45,7 +46,7 @@ class ServerlessSnyk {
   }
   auth() {
     if (process.env.snykAuth) {
-      var cmd = 'snyk auth ' + process.env.snykAuth;
+      var cmd = this.snykCLI + ' auth -api ' + process.env.snykAuth;
       try {
         var auth = execSync(cmd);
         this.serverless.cli.log(
@@ -64,7 +65,7 @@ class ServerlessSnyk {
   takeSnapshot() {
     if (this.monitor && this.authenticated) {
       try {
-        var monitor = execSync('snyk monitor');
+        var monitor = execSync(this.snykCLI + ' monitor');
         var output = monitor.toString().split('\n\n');
         for (var i = 0; i < output.length; i++) {
           if (output[i] != '\n') {
@@ -117,7 +118,7 @@ class ServerlessSnyk {
     var path = process.cwd();
     var that = this;
     try {
-      var protect = execSync('snyk protect');
+      var protect = execSync(this.snykCLI + ' protect');
       that.serverless.cli.log(
         protect.toString().replace(new RegExp('\r?\n','g'), '')
       );
