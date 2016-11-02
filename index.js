@@ -15,6 +15,8 @@ class ServerlessSnyk {
     /* Defaults to be overriden in serverless.yml file */
     this.breakOnVuln = true;
     this.snykAuth = false;
+    this.monitor = true;
+    this.authenticated = false;
 
     /* Pull in any custom snyk related variables */
     var customs = this.serverless.service.custom;
@@ -35,13 +37,13 @@ class ServerlessSnyk {
 
     this.hooks = {
         'before:deploy:createDeploymentArtifacts': () => BbPromise.bind(this)
+          .then(this.auth)
           .then(this.protect)
           .then(this.test)
-          .then(this.authAndMonitor),
+          .then(this.takeSnapshot),
       };
   }
-
-  authAndMonitor() {
+  auth() {
     if (process.env.snykAuth) {
       var cmd = 'snyk auth ' + process.env.snykAuth;
       try {
@@ -49,6 +51,7 @@ class ServerlessSnyk {
         this.serverless.cli.log(
           auth.toString().replace(new RegExp('\r?\n','g'), '')
         );
+        this.authenticated = true;
       } catch (error) {
         if (error.stderr) {
           throw new this.serverless.classes.Error(error.stdout.toString());
@@ -56,7 +59,10 @@ class ServerlessSnyk {
           throw error;
         }
       }
-
+    }
+  }
+  takeSnapshot() {
+    if (this.monitor && this.authenticated) {
       try {
         var monitor = execSync('snyk monitor');
         var output = monitor.toString().split('\n\n');
