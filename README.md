@@ -13,21 +13,15 @@ For Serverless v1 only.
 
 ## How do I use it?
 
-1. Install Snyk using npm
+1. Fix any existing vulnerable packages using [Snyk's GitHub integration](https://snyk.io/docs/github/) or [Snyk wizard](https://snyk.io/docs/using-snyk/#wizard).
 
-    `npm install -g snyk` 
-
-2. Run `snyk wizard` in your project
-
-    To get started, you'll need to run `snyk wizard`, which will create a Snyk policy file as well as prompt you to fix any discovered vulnerabilities.
-
-3. Install the Serverless Snyk plugin using npm
+2. Install the Serverless Snyk plugin using npm
 
    `npm install serverless-snyk --save`
 
    You should now have Serverless Snyk installed and ready to go. You can confirm that the plugin has been installed by running `serverless` from your command line. You should see the Snyk plugin in the list of installed plugins. 
 
-4. Add the plugin to your Serverless config
+3. Add the plugin to your Serverless config
 
    Next, you'll need to add the plugin to your `serverless.yml` file:
 
@@ -36,7 +30,7 @@ For Serverless v1 only.
       - serverless-snyk
    ```
 
-5. Optional: Get a Snyk API Key
+4. Optional: Get a Snyk API Key
 
    To avoid running into API rate limits and to enable [continuous monitoring](#continuous-monitoring), you'll need to [sign up for a Snyk account](https://snyk.io/auth/github) (if you don't have one already) and copy the API token from your dashboard. Detailed instructions on how to include the API token in your configuration are included in the [setting an API key](#setting-an-api-key) section below.
 
@@ -57,7 +51,7 @@ snykAuth=YOUR_API_TOKEN
 ```
 
 ### Deploying even if vulnerabilities are discovered
-By default, Serverless Snyk will stop serverless from deplying if Snyk detects any vulnerabilities in your dependencies. Each vulnerability will also be outputted, and you'll be prompted to run `snyk wizard` to address the issues. 
+By default, Serverless Snyk will stop serverless from deploying if Snyk detects any vulnerabilities in your dependencies. Each vulnerability will also be outputted, and you'll be prompted to run `snyk wizard` to address the issues. 
 
 If you would like serverless to deploy your application even if Snyk finds known vulnerabilities, you can accomplish this by using a custom variable in your `serverless.yml` file.
 
