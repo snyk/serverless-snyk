@@ -9,6 +9,8 @@
 
 Around 14% of npm packages carry a known vulnerability, and new vulnerabilities are being [discovered every day](https://snyk.io/vuln). The Serverless Snyk plugin helps you keep your application secure by allowing you to check the Node.js dependencies in your [Serverless](https://github.com/serverless/serverless) app for known vulnerabilities using [Snyk](https://snyk.io).
 
+[Read more about Serverless security and how vulnerable open source packages affect it on the Snyk blog.](https://snyk.io/blog/Serverless-Security-Vulnerabilities/)
+
 For Serverless v1 only.
 
 ## How do I use it?
@@ -78,4 +80,4 @@ custom:
 
 ### License
 
-MIT
+[License: Apache License, Version 2.0](LICENSE)
