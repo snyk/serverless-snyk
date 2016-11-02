@@ -1,5 +1,6 @@
 'use strict';
 
+const fs = require('fs');
 const snyk = require('snyk/lib');
 const chalk = require('chalk');
 const BbPromise = require('bluebird');
@@ -11,6 +12,7 @@ class ServerlessSnyk {
     this.serverless = serverless;
     this.options = options;
     this.snyk = snyk;
+    this.snykCLI = 'node ./node_modules/snyk/cli';
 
     /* Defaults to be overriden in serverless.yml file */
     this.breakOnVuln = true;
@@ -45,7 +47,7 @@ class ServerlessSnyk {
   }
   auth() {
     if (process.env.snykAuth) {
-      var cmd = 'snyk auth ' + process.env.snykAuth;
+      var cmd = this.snykCLI + ' auth -api ' + process.env.snykAuth;
       try {
         var auth = execSync(cmd);
         this.serverless.cli.log(
@@ -64,7 +66,7 @@ class ServerlessSnyk {
   takeSnapshot() {
     if (this.monitor && this.authenticated) {
       try {
-        var monitor = execSync('snyk monitor');
+        var monitor = execSync(this.snykCLI + ' monitor');
         var output = monitor.toString().split('\n\n');
         for (var i = 0; i < output.length; i++) {
           if (output[i] != '\n') {
@@ -115,19 +117,29 @@ class ServerlessSnyk {
 
   protect() {
     var path = process.cwd();
-    var that = this;
-    try {
-      var protect = execSync('snyk protect');
-      that.serverless.cli.log(
-        protect.toString().replace(new RegExp('\r?\n','g'), '')
-      );
-    } catch (error) {
-      if (error.stderr) {
-        throw new that.serverless.classes.Error(error.stdout.toString());
+    var self = this;
+
+    fs.exists(path + '/.snyk', function (exists) {
+      if (exists) {
+        try {
+          var protect = execSync(self.snykCLI + ' protect');
+          self.serverless.cli.log(
+            protect.toString().replace(new RegExp('\r?\n','g'), '')
+          );
+        } catch (error) {
+          if (error.stderr) {
+            throw new self.serverless.classes.Error(error.stdout.toString());
+          } else {
+            throw error;
+          }
+        }
       } else {
-        throw error;
+        self.serverless.cli.log(
+          'No Snyk protect policy was found. Skipping updates and patches.');
+        self.serverless.cli.log(
+          'Try running `snyk wizard` to define a Snyk policy.');
       }
-    }
+    });
   }
 }
 
